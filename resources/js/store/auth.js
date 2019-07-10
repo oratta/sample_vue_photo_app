@@ -3,14 +3,14 @@ const state = {
 }
 const getters = {}
 const mutations = {
-    setUser(state, user){
-        state.user = user;
+    setUser (state, user) {
+        state.user = user
     }
 }
 const actions = {
-    async register(context, data){
-        const response = await axios.post('/api/register', data);
-        context.commit('setUser', response.data);
+    async register (context, data) {
+        const response = await axios.post('/api/register', data)
+        context.commit('setUser', response.data)
     }
 }
 

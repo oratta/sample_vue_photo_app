@@ -63,11 +63,11 @@
                 console.log(this.loginForm)
             },
             async register () {
-                // authストアのregisterアクションを呼び出す
+                // authストアのresigterアクションを呼び出す
                 await this.$store.dispatch('auth/register', this.registerForm)
 
-                //トップページへ遷移
-                this.$router.puth('/')
+                // トップページに移動する
+                this.$router.push('/')
             }
         }
     }

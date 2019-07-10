@@ -1,10 +1,10 @@
 /**
- * get cookie value
- * @param {String} searchKey
- * @returns {string}
+ * クッキーの値を取得する
+ * @param {String} searchKey 検索するキー
+ * @returns {String} キーに対応する値
  */
-export function getCookieValue(searchKey){
-    if(typeof serchKey === 'undefined'){
+export function getCookieValue (searchKey) {
+    if (typeof searchKey === 'undefined') {
         return ''
     }
 
@@ -12,7 +12,7 @@ export function getCookieValue(searchKey){
 
     document.cookie.split(';').forEach(cookie => {
         const [key, value] = cookie.split('=')
-        if(key === searchKey){
+        if (key === searchKey) {
             return val = value
         }
     })
