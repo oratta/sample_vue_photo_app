@@ -90,6 +90,8 @@ export default {
             this.$emit('input', false)
 
             if(response.status !== CREATE){
+                const text = response.data.message + '@' + response.data.file + ':' + response.data.line
+                this.$store.commit('error/setMessage', text)
                 this.$store.commit('error/setCode', response.status)
                 return false
             }
