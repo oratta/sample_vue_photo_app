@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $visible = [
+        'name',
+    ];
+
     public function photos()
     {
         return $this->hasMany('App\Photo');
@@ -22,15 +26,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
     ];
 
     /**

@@ -3,9 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
+    /** 独自プロパティ追加 */
+    protected $appends = [
+        'url',
+    ];
+
+    /** JSONに含める属性の指定 */
+    protected $visible = [
+        'id',
+        'owner',
+        'url',
+    ];
+
     //プライマリキーの形
     protected $keyType = 'string';
 
@@ -19,6 +32,16 @@ class Photo extends Model
         if (!array_get($this->attributes, 'id')) {
             $this->setId();
         }
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id', 'users');
+    }
+
+    public function getUrlAttribute()
+    {
+        return Storage::cloud()->url($this->attributes['filename']);
     }
 
     private function setId()
