@@ -90,11 +90,21 @@ export default {
             this.$emit('input', false)
 
             if(response.status !== CREATE){
+
+                console.log(response.data.message)
+                console.log(response.status)
+                console.log(response)
                 const text = response.data.message + '@' + response.data.file + ':' + response.data.line
                 this.$store.commit('error/setMessage', text)
                 this.$store.commit('error/setCode', response.status)
                 return false
             }
+
+            // register message
+            this.$store.commit('message/setContent', {
+                content: '写真が投稿されました!',
+                timeout: 6000
+            })
 
             this.$router.push(`/photos/${response.data.id}`)
         }
