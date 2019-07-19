@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {CREATE, UNPROCESSABLE_ENTITY} from "../util";
+import {CREATED, UNPROCESSABLE_ENTITY} from "../util";
 import Loader from './Loader'
 
 export default {
@@ -89,11 +89,7 @@ export default {
             this.reset()
             this.$emit('input', false)
 
-            if(response.status !== CREATE){
-
-                console.log(response.data.message)
-                console.log(response.status)
-                console.log(response)
+            if(response.status !== CREATED){
                 const text = response.data.message + '@' + response.data.file + ':' + response.data.line
                 this.$store.commit('error/setMessage', text)
                 this.$store.commit('error/setCode', response.status)
