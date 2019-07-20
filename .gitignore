@@ -15,3 +15,5 @@ public
 /public
 .idea
 firebase-debug\.log
+/.idea/develop.iml
+/.idea/php.xml
