@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
+    protected $perPage = 3; //ページングのページ数
+
     /** 独自プロパティ追加 */
     protected $appends = [
         'url',

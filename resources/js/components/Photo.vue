@@ -10,22 +10,28 @@
         <RouterLink
             class="photo__overlay"
             :to="`/photos/${item.id}`"
-            :title="`View the photo by ${item.owner.name}`"></RouterLink>
-        <div class="photo__controls">
-            <button class="photo__action photo__action--like" title="Like photo">
-                <i class="icon ion-md-heart">12</i>
-            </button>
-            <a
-                class="photo__action"
-                title="Download photo"
-                @click.stop
-                :href="`/photos/${item.id}/download`">
-                <i class="icon ion-md-arrow-round-down"></i>
-            </a>
-        </div>
-        <div class="photo__username">
-            {{ item.owner.name }}
-        </div>
+            :title="`View the photo by ${item.owner.name}`"
+        >
+            <div class="photo__controls">
+                <button
+                    class="photo__action photo__action--like"
+                    title="Like photo"
+                >
+                    <i class="icon ion-md-heart">12</i>
+                </button>
+                <a
+                    class="photo__action"
+                    title="Download photo"
+                    @click.stop
+                    :href="`/photos/${item.id}/download`"
+                >
+                    <i class="icon ion-md-arrow-round-down"></i>
+                </a>
+            </div>
+            <div class="photo__username">
+                {{ item.owner.name }}
+            </div>
+        </RouterLink>
     </div>
 </template>
 

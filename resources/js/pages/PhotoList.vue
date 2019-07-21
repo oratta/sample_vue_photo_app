@@ -8,31 +8,43 @@
                 :item="photo"
             />
         </div>
+        <Pagination :current-page="currentPage" :last-page="lastPage" />
     </div>
 </template>
 <script>
     import Photo from '../components/Photo.vue'
     import { OK } from '../util'
+    import Pagination from '../components/Pagination.vue'
 
     export default {
         components: {
-            Photo
+            Photo,
+            Pagination
+        },
+        props: {
+            page: {
+                type: Number,
+                required: false,
+                default: 1
+            }
         },
         data () {
             return {
-                photos: []
+                photos: [],
+                currentPage: 0,
+                lastPage: 0
             }
         },
         methods: {
             async fetchPhotos () {
-                const response = await axios.get('/api/photos')
-
+                const response = await axios.get(`/api/photos/?page=${this.page}`)
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-
                 this.photos = response.data.data
+                this.currentPage = response.data.current_page
+                this.lastPage = response.data.last_page
             }
         },
         watch: {
