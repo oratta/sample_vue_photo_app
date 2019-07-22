@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
-    protected $perPage = 2; //ページングのページ数
+    protected $perPage = 15; //ページングのページ数
 
     /** 独自プロパティ追加 */
     protected $appends = [
