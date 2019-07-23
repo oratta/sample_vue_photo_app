@@ -19,6 +19,7 @@ class Photo extends Model
         'id',
         'owner',
         'url',
+        'comments'
     ];
 
     //プライマリキーの形
@@ -34,6 +35,11 @@ class Photo extends Model
         if (!array_get($this->attributes, 'id')) {
             $this->setId();
         }
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->orderBy('id', 'desc');
     }
 
     public function owner()
