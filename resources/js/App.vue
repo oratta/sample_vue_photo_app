@@ -16,7 +16,7 @@
     import Navbar from './components/Navbar.vue'
     import Footer from './components/Footer.vue'
 
-    import { INTERNAL_SERVER_ERROR, UNAUTHORIZED } from "./util";
+    import { INTERNAL_SERVER_ERROR, UNAUTHORIZED, NOT_FOUND } from "./util";
 
     export default {
         components: {
@@ -40,6 +40,8 @@
                         this.$store.commit('auth/setUser', null)
                         // ログイン画面へ
                         this.$router.push('/login')
+                    } else if (val === NOT_FOUND){
+                        this.$router.push('/not-found')
                     }
                 },
                 immediate: true
