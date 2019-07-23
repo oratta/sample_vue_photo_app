@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class Photo extends Model
 {
@@ -12,6 +14,8 @@ class Photo extends Model
     /** 独自プロパティ追加 */
     protected $appends = [
         'url',
+        'likes_count',
+        'liked_by_user',
     ];
 
     /** JSONに含める属性の指定 */
@@ -19,7 +23,10 @@ class Photo extends Model
         'id',
         'owner',
         'url',
-        'comments'
+        'comments',
+        'likes_count',
+        'liked_by_user',
+
     ];
 
     //プライマリキーの形
@@ -35,6 +42,22 @@ class Photo extends Model
         if (!array_get($this->attributes, 'id')) {
             $this->setId();
         }
+    }
+
+    public function getLikesCountAttribute()
+    {
+        return $this->likes->count();
+    }
+
+    public function getLikedByUserAttribute()
+    {
+        if(Auth::guest()){
+            return false;
+        }
+
+        return $this->likes->contains(function ($user){
+            return $user->id === Auth::user()->id;
+        });
     }
 
     public function likes()
