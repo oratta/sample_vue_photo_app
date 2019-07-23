@@ -95,4 +95,33 @@ class PhotoController extends Controller
 
         return response($new_comment, 201);
     }
+
+    public function like(string $id)
+    {
+        $photo = Photo::where('id', $id)->with('likes')->first();
+
+        if (!$photo){
+            abort(404);
+        }
+
+        $photo->likes()->detach(Auth::user()->id);
+        $photo->likes()->attach(Auth::user()->id);
+
+        return ["photo_id" => $id,
+        ];
+    }
+
+    public function unlike(string $id)
+    {
+        $photo = Photo::where('id', $id)->with('like')->first();
+
+        if(!$photo){
+            abort(404);}
+
+        $photo->likes()->detach(Auth::user()->id);
+
+        return ["photo_id" => $id,
+        ];
+
+    }
 }
